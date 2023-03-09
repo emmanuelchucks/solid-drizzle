@@ -1,0 +1,12 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1678326885770,
+      "tag": "0000_cloudy_captain_midlands"
+    }
+  ]
+}
