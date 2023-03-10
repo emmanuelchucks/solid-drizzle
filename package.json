@@ -12,7 +12,7 @@
   "type": "module",
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.2",
-    "autoprefixer": "^10.4.13",
+    "autoprefixer": "^10.4.14",
     "drizzle-kit": "^0.17.0",
     "mysql2": "^3.2.0",
     "postcss": "^8.4.21",
@@ -28,9 +28,9 @@
   "dependencies": {
     "@planetscale/database": "^1.6.0",
     "@solidjs/meta": "^0.28.2",
-    "@solidjs/router": "^0.7.0",
+    "@solidjs/router": "^0.8.0",
     "drizzle-orm": "^0.21.1",
-    "solid-js": "^1.6.12",
+    "solid-js": "^1.6.13",
     "solid-start": "^0.2.23",
     "undici": "^5.20.0",
     "zod": "^3.21.4"
