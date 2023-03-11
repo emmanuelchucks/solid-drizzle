@@ -1,8 +1,8 @@
 import { drizzle } from "drizzle-orm/mysql2"
 import { migrate } from "drizzle-orm/mysql2/migrator"
-import mysql from "mysql2/promise"
+import { createPool } from "mysql2/promise"
 
-const connection = mysql.createPool({
+const connection = createPool({
   host: "localhost",
   user: "root",
   database: "drizzle-demo",
