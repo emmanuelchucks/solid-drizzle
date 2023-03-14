@@ -30,7 +30,7 @@ export default function Post() {
         .where(eq(posts.id, Number(id)))
     },
     {
-      key: ["post", id],
+      key: ["posts", id],
     }
   )
 
@@ -55,7 +55,7 @@ export default function Post() {
       return redirect(`/post/${parsing.data.postId}`)
     },
     {
-      invalidate: ["post", id],
+      invalidate: ["posts", id],
     }
   )
 
@@ -78,7 +78,7 @@ export default function Post() {
       return redirect(`/post/${parsing.data.postId}`)
     },
     {
-      invalidate: ["post", id],
+      invalidate: ["posts", id],
     }
   )
 
