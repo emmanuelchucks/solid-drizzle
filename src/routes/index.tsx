@@ -80,7 +80,7 @@ export default function Home() {
                         dateTime={String(post.createdAt)}
                         class="text-sm text-gray-600"
                       >
-                        {post.createdAt?.toLocaleDateString?.()}
+                        {new Date(post.createdAt ?? "").toLocaleDateString()}
                       </time>
                     </div>
                     <p class="text-gray-600 line-clamp-2">{post.body}</p>
