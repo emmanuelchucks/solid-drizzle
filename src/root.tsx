@@ -28,7 +28,7 @@ export default function Root() {
       <Body>
         <Suspense>
           <ErrorBoundary>
-            <main class="mx-auto mt-24 mb-12 grid gap-y-6 px-4 md:max-w-sm md:p-0">
+            <main class="mx-auto mt-24 mb-12 grid gap-y-6 px-4 text-gray-900 md:max-w-sm md:p-0">
               <Routes>
                 <FileRoutes />
               </Routes>
