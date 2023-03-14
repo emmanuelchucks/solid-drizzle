@@ -53,9 +53,6 @@ export default function Post() {
         .insert(comments)
         .values({ ...parsing.data })
       return redirect(`/post/${parsing.data.postId}`)
-    },
-    {
-      invalidate: ["posts", id],
     }
   )
 
@@ -76,9 +73,6 @@ export default function Post() {
 
       await db(env).delete(comments).where(eq(comments.id, parsing.data.id))
       return redirect(`/post/${parsing.data.postId}`)
-    },
-    {
-      invalidate: ["posts", id],
     }
   )
 

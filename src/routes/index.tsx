@@ -11,14 +11,9 @@ import { db } from "~/db/client"
 import { comments, posts } from "~/db/schema"
 
 export default function Home() {
-  const data = createServerData$(
-    async (_, { env }) => {
-      return db(env).select().from(posts)
-    },
-    {
-      key: ["posts"],
-    }
-  )
+  const data = createServerData$(async (_, { env }) => {
+    return db(env).select().from(posts)
+  })
 
   const [addingPost, addPost] = createServerAction$(
     async (form: FormData, { env }) => {
@@ -39,9 +34,6 @@ export default function Home() {
         .insert(posts)
         .values({ ...parsing.data })
       return redirect("/")
-    },
-    {
-      invalidate: ["posts"],
     }
   )
 
@@ -64,9 +56,6 @@ export default function Home() {
         db(env).delete(posts).where(eq(posts.id, parsing.data.id)),
       ])
       return redirect("/")
-    },
-    {
-      invalidate: ["posts"],
     }
   )
 
