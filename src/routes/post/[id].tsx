@@ -13,21 +13,17 @@ import { comments, posts } from "~/db/schema"
 
 export default function Post() {
   const { id } = useParams()
-  const data = createServerData$(
+  const post = createServerData$(
     async ([, id], { env }) => {
-      return db(env)
-        .select({
-          postId: posts.id,
-          postTitle: posts.title,
-          postBody: posts.body,
-          postCreatedAt: posts.createdAt,
-          commentId: comments.id,
-          commentBody: comments.body,
-          commentCreatedAt: comments.createdAt,
-        })
+      const data = await db(env)
+        .select()
         .from(posts)
         .leftJoin(comments, eq(posts.id, comments.postId))
         .where(eq(posts.id, Number(id)))
+      return {
+        ...data[0].posts,
+        comments: data.flatMap((row) => row.comments ?? []),
+      }
     },
     {
       key: ["posts", id],
@@ -77,40 +73,42 @@ export default function Post() {
   )
 
   return (
-    <Show when={data()} fallback={<PostNotFound />}>
+    <Show when={post()} fallback={<PostNotFound />}>
       <header class="space-y-2">
-        <h1 class="text-2xl font-semibold text-gray-800">
-          {data()?.[0].postTitle}
-        </h1>
+        <h1 class="text-2xl font-semibold text-gray-800">{post()?.title}</h1>
         <time
-          dateTime={String(data()?.[0].postCreatedAt)}
+          dateTime={String(post()?.createdAt)}
           class="text-sm text-gray-600"
         >
-          {new Date(data()?.[0].postCreatedAt ?? "").toDateString()}
+          {new Date(post()?.createdAt ?? "").toDateString()}
         </time>
       </header>
-      <p class="whitespace-pre-line">{data()?.[0].postBody}</p>
+      <p class="whitespace-pre-line">{post()?.body}</p>
 
       <section>
         <h2 class="font-medium">Comments</h2>
         <Show
-          when={data()?.[0].commentId}
+          when={post()?.comments?.length}
           fallback={<p class="text-gray-600">No comments yet.</p>}
         >
           <ul class="mt-2 space-y-2">
-            <For each={data()}>
-              {({ commentBody, commentCreatedAt, postId, commentId }) => (
+            <For each={post()?.comments}>
+              {(comment) => (
                 <li class="group relative rounded-md bg-gray-50 py-2 px-4">
                   <time
-                    dateTime={String(commentCreatedAt)}
+                    dateTime={String(comment?.createdAt)}
                     class="text-xs text-gray-600"
                   >
-                    {new Date(commentCreatedAt ?? "").toDateString()}
+                    {new Date(comment?.createdAt ?? "").toDateString()}
                   </time>
-                  <p class="whitespace-pre-line">{commentBody}</p>
+                  <p class="whitespace-pre-line">{comment?.body}</p>
                   <deleteComment.Form class="absolute -top-2 -right-2">
-                    <input type="hidden" name="postId" value={postId} />
-                    <input type="hidden" name="id" value={commentId ?? ""} />
+                    <input
+                      type="hidden"
+                      name="postId"
+                      value={comment?.postId}
+                    />
+                    <input type="hidden" name="id" value={comment?.id ?? ""} />
                     <button
                       type="submit"
                       disabled={deletingComment.pending}
