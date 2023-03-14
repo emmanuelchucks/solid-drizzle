@@ -7,6 +7,18 @@
       "version": "5",
       "when": 1678326885770,
       "tag": "0000_cloudy_captain_midlands"
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1678796194507,
+      "tag": "0001_acoustic_darkstar"
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1678798405541,
+      "tag": "0002_pretty_tigra"
     }
   ]
 }

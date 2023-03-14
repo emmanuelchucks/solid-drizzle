@@ -1,0 +1,1 @@
+ALTER TABLE posts MODIFY COLUMN `type` enum('weekly','monthly') NOT NULL DEFAULT 'weekly';

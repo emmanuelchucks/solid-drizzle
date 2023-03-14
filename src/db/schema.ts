@@ -12,8 +12,8 @@ export const posts = mysqlTable("posts", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   body: text("body").notNull(),
-  type: mysqlEnum("type", ["weekly", "monthly"]).default("weekly"),
-  createdAt: timestamp("created_at").defaultNow(),
+  type: mysqlEnum("type", ["weekly", "monthly"]).notNull().default("weekly"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
 export const comments = mysqlTable(
@@ -22,7 +22,7 @@ export const comments = mysqlTable(
     id: serial("id").primaryKey(),
     postId: int("post_id").notNull(),
     body: text("body").notNull(),
-    createdAt: timestamp("created_at").defaultNow(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
   },
   (comments) => ({
     postIdIdx: index("post_id_idx").on(comments.postId),
