@@ -107,6 +107,7 @@ export default function Home() {
       <addPost.Form class="grid gap-y-4">
         <input
           name="title"
+          value={String(addingPost.input?.get("title") ?? "")}
           placeholder="Title"
           classList={{
             "rounded-md border border-gray-200 py-1 px-2": true,
@@ -115,6 +116,7 @@ export default function Home() {
         />
         <textarea
           name="body"
+          value={String(addingPost.input?.get("body") ?? "")}
           placeholder="Body"
           classList={{
             "min-h-[160px] rounded-md border border-gray-200 py-1 px-2": true,

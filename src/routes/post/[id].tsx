@@ -128,6 +128,7 @@ export default function Post() {
         <input type="hidden" name="postId" value={id} />
         <textarea
           name="body"
+          value={String(addingComment.input?.get("body") ?? "")}
           placeholder="Body"
           classList={{
             "min-h-[160px] rounded-md border border-gray-200 py-1 px-2": true,
