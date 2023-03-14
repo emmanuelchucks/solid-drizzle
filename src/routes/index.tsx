@@ -8,7 +8,7 @@ import {
 } from "solid-start/server"
 import { z } from "zod"
 import { db } from "~/db/client"
-import { posts } from "~/db/schema"
+import { comments, posts } from "~/db/schema"
 
 export default function Home() {
   const data = createServerData$(
@@ -59,7 +59,10 @@ export default function Home() {
         })
       }
 
-      await db(env).delete(posts).where(eq(posts.id, parsing.data.id))
+      await Promise.allSettled([
+        db(env).delete(comments).where(eq(comments.postId, parsing.data.id)),
+        db(env).delete(posts).where(eq(posts.id, parsing.data.id)),
+      ])
       return redirect("/")
     },
     {
