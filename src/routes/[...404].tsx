@@ -1,21 +1,13 @@
-import { A } from "solid-start"
-import { HttpStatusCode } from "solid-start/server"
+import { NotFound } from "~/components/NotFound"
 
-export default function NotFound() {
+export default function PageNotFound() {
   return (
-    <>
-      <HttpStatusCode code={404} />
-      <h1 class="text-xl font-bold text-gray-600">404: Not Found</h1>
+    <NotFound title="404: Not Found">
+      <p>The page you are looking for doesn't exist or has been moved.</p>
       <p>
         "I told my wife she was drawing her eyebrows too high. She looked
         surprised."
       </p>
-      <A
-        href="/"
-        class="text-gray-600 underline underline-offset-4 hover:text-gray-500"
-      >
-        &larr; Go home
-      </A>
-    </>
+    </NotFound>
   )
 }
