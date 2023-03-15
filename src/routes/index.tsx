@@ -80,10 +80,10 @@ export default function Home() {
                         {post.title}
                       </h2>
                       <time
-                        dateTime={String(post.createdAt)}
+                        dateTime={post.createdAt.toJSON()}
                         class="text-sm text-gray-600"
                       >
-                        {new Date(post.createdAt ?? "").toLocaleDateString()}
+                        {post.createdAt.toLocaleDateString()}
                       </time>
                     </div>
                     <p class="text-gray-600 line-clamp-2">{post.body}</p>

@@ -77,10 +77,10 @@ export default function Post() {
       <header class="space-y-2">
         <h1 class="text-2xl font-semibold text-gray-800">{post()?.title}</h1>
         <time
-          dateTime={String(post()?.createdAt)}
+          dateTime={post()?.createdAt.toJSON()}
           class="text-sm text-gray-600"
         >
-          {new Date(post()?.createdAt ?? "").toDateString()}
+          {post()?.createdAt.toDateString()}
         </time>
       </header>
       <p class="whitespace-pre-line">{post()?.body}</p>
@@ -96,10 +96,10 @@ export default function Post() {
               {(comment) => (
                 <li class="group relative rounded-md bg-gray-50 py-2 px-4">
                   <time
-                    dateTime={String(comment?.createdAt)}
+                    dateTime={comment?.createdAt.toJSON()}
                     class="text-xs text-gray-600"
                   >
-                    {new Date(comment?.createdAt ?? "").toDateString()}
+                    {comment?.createdAt.toDateString()}
                   </time>
                   <p class="whitespace-pre-line">{comment?.body}</p>
                   <deleteComment.Form class="absolute -top-2 -right-2">
